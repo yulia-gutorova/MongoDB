@@ -4,27 +4,22 @@ const controller = require('../controllers/postController');
 
 //*********************************************************** 
 // Return all items
-
 router.get('/', controller.getAllPosts);
 
 //*********************************************************** 
-// Get a specific item by custom id
-
+// Get a specific item by id
 router.get('/:postId', controller.getPostById);
 
 //*********************************************************** 
 // Create a new item
-
 router.post('/', controller.createPost);
 
 //*********************************************************** 
-// Delete a specific item
-
+// Delete a specific ite
 router.delete('/:postId', controller.deletePost);
 
 //*********************************************************** 
 // Update existing item
-
 router.patch('/:postId', controller.updatePost);
 
 module.exports = router;

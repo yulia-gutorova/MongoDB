@@ -1,35 +1,37 @@
 require('dotenv').config()
 
-const express = require('express')    // Import exrepss, a light-weight framework
-const app = express()                 // Init exrpess, and save it in "app" variable
-const mongoose = require('mongoose')  // Import mongoose, a tool that gives NoSQL DB  (such as MongoDB) the abilities of a relational DB
-const PORT = process.env.PORT || 5000;
+const express = require('express')              //Import exrepss
+const app = express()                           //Init exrpess
+const mongoose = require('mongoose')            //Import mongoose
+const PORT = process.env.PORT || 5000;          //Define port
 
 //middleware
-app.use(express.json());    // Formats data to Json
+app.use(express.json());                        // Formats data to Json
 const postRouter = require('./routes/posts');
 app.use('/posts', postRouter);
 
-/*********************************************************** 
-/ Base URL
-************************************************************/
+//*********************************************************** 
+// Base URL
 
 app.get('/', function (req, res) 
 {
   res.send('Hello World');
 })
 
+//*********************************************************** 
 //DB connection
 mongoose.connect(
-    `mongodb+srv://uggla-gut:ComHem2011@cluster0.qrygrvo.mongodb.net/Contacts`,
+    process.env.DB_URL,
     { useNewUrlParser: true, useUnifiedTopology: true},
     () => {
+        console.log(`***********************************`);
         console.log('DB connected...');
+        console.log(`***********************************`);
     }
 )
 
+//*********************************************************** 
 //Listen to server
-//app.listen(PORT); //Listen through port 5000
 app.listen(PORT, err => 
     {
         if (err) 
@@ -38,6 +40,7 @@ app.listen(PORT, err =>
         }
         else
         {
+            console.log(`\n***********************************`);
             console.log(`Server listening on port ${PORT}...`);
         }
     });
